@@ -8,9 +8,11 @@ import {
   Dimensions,
   TouchableOpacity,
   TouchableHighlight,
+  Linking,
 } from 'react-native';
 import {SwiperFlatList} from 'react-native-swiper-flatlist';
 import LinearGradient from 'react-native-linear-gradient';
+import SendIntentAndroid from 'react-native-send-intent';
 
 // import poster data
 import posterData from '../Utils/homeScreenSlideshowData';
@@ -21,36 +23,84 @@ export default function HomeScreen() {
     {
       name: 'telegram',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/185/185977.png',
+      onIconPress: () => {
+        console.log('Telegram Is Click');
+        Linking.openURL('https://telegram.me/i_am_haresh').catch(() => {
+          console.log('Telegram Error');
+        });
+      },
     },
     {
       name: 'youtube',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/185/185983.png',
+      onIconPress: () => {
+        console.log('Youtube Is Click');
+        Linking.openURL('https://www.youtube.com/c/CodeDiggers').catch(() => {
+          console.log('Youtube Error');
+        });
+      },
     },
     {
       name: 'qa',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/1484/1484822.png',
+      onIconPress: () => {
+        console.log('Website Is Click');
+        Linking.openURL('http://codediggers.gq').catch(() => {
+          console.log('Website Error');
+        });
+      },
     },
     {
       name: 'information',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/1028/1028917.png',
+      onIconPress: () => {
+        console.log('Website Is Click');
+        Linking.openURL('http://codediggers.gq').catch(() => {
+          console.log('Website Error');
+        });
+      },
     },
   ];
   var bottomrow2 = [
     {
       name: 'share',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/469/469335.png',
+      onIconPress: () => {
+        console.log('Share Is Click');
+
+        SendIntentAndroid.openChooserWithOptions(
+          {
+            subject: 'Please share this app',
+            text: 'Hello I Am Haresh Prajapati Subscribe Our Channel On Youtube :- https://www.youtube.com/c/CodeDiggers',
+          },
+          'Share Story',
+        );
+      },
     },
     {
       name: 'internet',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/457/457654.png',
+      onIconPress: () => {
+        console.log('Website Is Click');
+
+        Linking.openURL('http://mrhp.gq').catch(() => {
+          console.log('Website Error');
+        });
+      },
     },
     {
       name: 'happyface',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/1051/1051270.png',
+      onIconPress: () => {
+        console.log('Website Is Click');
+      },
     },
     {
       name: 'history',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/4763/4763081.png',
+      onIconPress: () => {
+        // console.log('Telegram Is Click');
+      },
     },
   ];
   return (
@@ -87,11 +137,14 @@ export default function HomeScreen() {
             <View style={styles.bottomRow}>
               {bottomrow1.map((item, index) => {
                 return (
-                  <Image
-                    source={{uri: item.logoUrl}}
+                  <TouchableOpacity
                     key={index}
-                    style={styles.containerIcons}
-                  />
+                    onPress={() => item.onIconPress()}>
+                    <Image
+                      source={{uri: item.logoUrl}}
+                      style={styles.containerIcons}
+                    />
+                  </TouchableOpacity>
                 );
               })}
             </View>
@@ -99,11 +152,14 @@ export default function HomeScreen() {
             <View style={styles.bottomRow}>
               {bottomrow2.map((item, index) => {
                 return (
-                  <Image
-                    source={{uri: item.logoUrl}}
+                  <TouchableOpacity
                     key={index}
-                    style={styles.containerIcons}
-                  />
+                    onPress={() => item.onIconPress()}>
+                    <Image
+                      source={{uri: item.logoUrl}}
+                      style={styles.containerIcons}
+                    />
+                  </TouchableOpacity>
                 );
               })}
             </View>
@@ -116,7 +172,7 @@ export default function HomeScreen() {
           <View style={styles.bottomNavigationContainer}>
             {bottomOptionList.map((item, index) => {
               return (
-                <View>
+                <View key={index}>
                   <Text style={styles.bottomNavigationText}>{item}</Text>
                 </View>
               );

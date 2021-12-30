@@ -13,12 +13,20 @@ import {
 import {SwiperFlatList} from 'react-native-swiper-flatlist';
 import LinearGradient from 'react-native-linear-gradient';
 import SendIntentAndroid from 'react-native-send-intent';
+import {useNavigation} from '@react-navigation/native';
 
 // import poster data
 import posterData from '../Utils/homeScreenSlideshowData';
 
 export default function HomeScreen() {
-  var bottomOptionList = ['Bollywood', 'Hollywood', 'Series', 'LiveTV'];
+  const navigationHook = useNavigation();
+
+  var bottomOptionList = [
+    {name: 'Bollywood', navigationName: 'Bollywood'},
+    {name: 'Hollywood', navigationName: 'Hollywood'},
+    {name: 'Series', navigationName: 'Series'},
+    {name: 'LiveTV', navigationName: 'Livetv'},
+  ];
   var bottomrow1 = [
     {
       name: 'telegram',
@@ -99,10 +107,19 @@ export default function HomeScreen() {
       name: 'history',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/4763/4763081.png',
       onIconPress: () => {
-        // console.log('Telegram Is Click');
+        handleNavigation('History');
       },
     },
   ];
+
+  const handleNavigation = navigationName => {
+    try {
+      navigationHook.navigate(navigationName);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'transparent'} translucent={true} />
@@ -172,9 +189,11 @@ export default function HomeScreen() {
           <View style={styles.bottomNavigationContainer}>
             {bottomOptionList.map((item, index) => {
               return (
-                <View key={index}>
-                  <Text style={styles.bottomNavigationText}>{item}</Text>
-                </View>
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleNavigation(item.navigationName)}>
+                  <Text style={styles.bottomNavigationText}>{item.name}</Text>
+                </TouchableOpacity>
               );
             })}
           </View>

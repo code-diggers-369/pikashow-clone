@@ -16,7 +16,7 @@ export default function BollywoodScreen() {
         <FlatList
           data={MovieList}
           renderItem={list => {
-            return <Card movieData={list.item} />;
+            return <Card movieData={list.item} type="bollywood" />;
           }}
           numColumns={3}
         />

@@ -1,18 +1,24 @@
 import React from 'react';
 import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
 
-export default function MovieListCard({movieData}) {
+export default function MovieListCard({movieData, type}) {
   console.log(movieData);
   return (
     <View style={styles.container}>
       <View style={styles.qualityLable}>
-        <Text style={styles.qualityLableText}>HD</Text>
+        <Text style={styles.qualityLableText}>
+          {type == 'series' ? movieData.rating : movieData.qualityLable}
+        </Text>
       </View>
       <Image source={{uri: movieData.posterUrl}} style={styles.imagePoster} />
 
       <View style={styles.bottomInformationContainer}>
         <Text style={styles.movieName}>{movieData.name}</Text>
-        <Text style={styles.movieYear}>{movieData.year}</Text>
+        <Text style={styles.movieYear}>
+          {type == 'series'
+            ? `Total Seasons ${movieData.seasons.length}`
+            : movieData.year}
+        </Text>
       </View>
     </View>
   );

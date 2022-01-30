@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
 
 export default function MovieListCard({movieData, type}) {
-  console.log(movieData);
   return (
     <View style={styles.container}>
       <View style={styles.qualityLable}>

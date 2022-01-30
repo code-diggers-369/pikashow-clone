@@ -2,6 +2,7 @@ const data = [
   {
     name: 'Human',
     rating: '8.5',
+    category: ['Drama', 'Mystery', 'Crime'],
     seasons: [
       {
         seasonNo: 1,
@@ -26,6 +27,7 @@ const data = [
   {
     name: 'Cubicles',
     rating: '7.8',
+    category: ['Comedy', 'Drama'],
     seasons: [
       {
         seasonNo: 2,
@@ -56,6 +58,7 @@ const data = [
   {
     name: 'Hawkeye (Hindi)',
     rating: '9.5',
+    category: ['Action', 'Adventure', 'Drama'],
     seasons: [
       {
         seasonNo: 1,
@@ -76,6 +79,7 @@ const data = [
   {
     name: 'Money Heist',
     rating: '8.3',
+    category: ['Action', 'Crime', 'Mystery'],
     seasons: [
       {
         seasonNo: 5,
@@ -162,6 +166,7 @@ const data = [
   {
     name: 'Kota Factory',
     rating: '8.7',
+    category: ['Comedy', 'Drama'],
     seasons: [
       {
         seasonNo: 2,

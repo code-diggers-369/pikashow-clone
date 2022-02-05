@@ -17,7 +17,7 @@ import Card from '../Components/MovieListCard';
 
 export default function Search() {
   const route = useRoute();
-  const {data} = route.params;
+  const {data, type} = route.params;
 
   const [searchText, setSearchText] = useState('');
   const [tempData, setTempData] = useState([]);
@@ -37,9 +37,14 @@ export default function Search() {
     const tempResult = data.filter(temp => {
       const nameTextLower = temp.name.toLowerCase();
       const searchTextLower = searchText.toLowerCase();
+      const year =
+        type == 'series'
+          ? temp.seasons[0].year.toString()
+          : temp.year.toString().toLowerCase();
       if (
         nameTextLower.indexOf(searchTextLower) != -1 ||
-        temp.category.includes(searchText)
+        temp.category.includes(searchText) ||
+        year.indexOf(searchTextLower) != -1
       ) {
         return temp;
       }
@@ -85,7 +90,7 @@ export default function Search() {
             <FlatList
               data={tempData}
               renderItem={list => {
-                return <Card movieData={list.item} type="bollywood" />;
+                return <Card movieData={list.item} type={type} />;
               }}
               numColumns={3}
             />

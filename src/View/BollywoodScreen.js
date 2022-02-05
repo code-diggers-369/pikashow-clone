@@ -31,6 +31,7 @@ export default function BollywoodScreen() {
         onPress={() =>
           navigationHook.navigate('Search', {
             data: MovieList,
+            type: 'bollywood',
           })
         }>
         <Ionicons

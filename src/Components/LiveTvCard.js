@@ -1,9 +1,26 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-export default function MovieListCard({channelData, type}) {
+export default function MovieListCard({channelData}) {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        console.log(channelData);
+        navigation.navigate('VideoPlayer', {
+          channelData: channelData,
+        });
+      }}>
       <View style={styles.channelImgContainer}>
         <Image
           source={{
@@ -22,7 +39,7 @@ export default function MovieListCard({channelData, type}) {
           ? channelData.name
           : channelData.name.slice(0, 20)}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
